@@ -6,7 +6,7 @@
 	This is just a test that would depend on the 3D Model used.
 	Vertex animations would allow the use of GPU Instancing, 
 	enabling the use of a dense amount of animated fish.
-  The code may not be optimized but it was just a test
+  	The code may not be optimized but it was just a test
 */
 
 Shader "Custom/FishAnimation" {
@@ -41,26 +41,34 @@ Shader "Custom/FishAnimation" {
 		float4 pos : SV_POSITION;
 		float2 uv : TEXCOORD0;
 	};
+	
+	// X AXIS
 
 	float _SpeedX;
 	float _FrequencyX;
 	float _AmplitudeX;
+	
+	// Y AXIS
 
 	float _SpeedY;
 	float _FrequencyY;
 	float _AmplitudeY;
 
+	// Z AXIS
+	
 	float _SpeedZ;
 	float _FrequencyZ;
 	float _AmplitudeZ;
 
+	// Head Limit (Head wont shake so much)
+	
 	float _HeadLimit;
 
 	v2f vert(appdata_base v)
 	{
 		v2f o;
 
-		//X AXIS
+		//Z AXIS
 
 		v.vertex.z += sin((v.vertex.z + _Time.y * _SpeedX) * _FrequencyX)* _AmplitudeX;		
 
@@ -68,7 +76,7 @@ Shader "Custom/FishAnimation" {
 
 		v.vertex.y += sin((v.vertex.z + _Time.y * _SpeedY) * _FrequencyY)* _AmplitudeY;
 
-		//Z AXIS
+		//X AXIS
 
 		if (v.vertex.z > _HeadLimit)
 		{
